@@ -1,7 +1,12 @@
 ---
 import Base from "../layouts/Base.astro";
+import TwitchEmbed from "../components/TwitchEmbed.astro";
 import { externalLinks } from "../../config";
 ---
+
+<script>
+  import "@justinribeiro/lite-youtube";
+</script>
 
 <!-- {{ define "customjs" }}
 {{ end }} --><!-- TODO: analytics  --><!-- {{ define "google-site-verification" }}
@@ -48,18 +53,9 @@ import { externalLinks } from "../../config";
 
         <div class="col-md-12">
           <div class="row m-2">
-            <div
-              class="col-md-6 embed-responsive embed-responsive-16by9 my-auto"
-            >
-              <iframe
-                class="embed-responsive-item"
-                src="https://www.youtube.com/embed/videoseries?list=PLaCq3HqKQR6rlPpf2GAOXp52ddt0V71Yl"
-                frameborder="0"
-                style="padding: unset; max-height: 180px;"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              >
-              </iframe>
+            <div class="col-md-6 my-auto" style="width: 100%;">
+              <!-- TODO: build an Astro component which prepars everything at build time -->
+              <lite-youtube videoid="AY1zuH2mHQ0" />
             </div>
             <div class="col-md-6 p-4">
               <h5>Sviluppare il primo gioco con Godot Engine 3</h5>
@@ -84,18 +80,8 @@ import { externalLinks } from "../../config";
                 <li>Remote debugging & profiling</li>
               </ul>
             </div>
-            <div
-              class="col-md-6 embed-responsive embed-responsive-16by9 my-auto"
-            >
-              <iframe
-                class="embed-responsive-item"
-                src="https://www.youtube.com/embed/videoseries?list=PLaCq3HqKQR6rNyqulBsbca-6wzxp8H52r"
-                frameborder="0"
-                style="padding: unset; max-height: 180px;"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              >
-              </iframe>
+            <div class="col-md-6 my-auto">
+              <lite-youtube videoid="x0emyyXC_sM" />
             </div>
           </div>
           <hr class="mb-4" style="border-color: rgba(127, 218, 189, 0.2);" />
@@ -171,21 +157,9 @@ import { externalLinks } from "../../config";
         </div>
         <div class="col-md-12">
           <!-- Add a placeholder for the Twitch embed -->
-          <div id="twitch-embed"></div>
-
           <!-- Load the Twitch embed script -->
-          <script src="https://player.twitch.tv/js/embed/v1.js"></script>
-
           <!-- Create a Twitch.Player object. This will render within the placeholder div -->
-          <script type="text/javascript">
-            new Twitch.Player("twitch-embed", {
-              collection: "ypp4CY71rRaYgA",
-              video: "1153359819",
-              height: 395,
-              width: "100%",
-              autoplay: false,
-            });
-          </script>
+          <TwitchEmbed />
         </div>
         <div class="col-md-12 text-center">
           <hr class="mb-4" style="border-color: rgba(127, 218, 189, 0.2);" />

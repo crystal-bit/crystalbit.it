@@ -1,0 +1,22 @@
+---
+// TODO: load twitch js only on intersection observer
+---
+
+<style>
+  #twitch-embed {
+    height: 395px;
+  }
+</style>
+
+<div id="twitch-embed"></div>
+
+<script client:visible src="https://player.twitch.tv/js/embed/v1.js"></script>
+<script client:visible>
+  new Twitch.Player("twitch-embed", {
+    collection: "ypp4CY71rRaYgA",
+    video: "1153359819",
+    height: 395,
+    width: "100%",
+    autoplay: false,
+  });
+</script>
