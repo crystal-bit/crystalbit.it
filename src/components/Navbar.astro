@@ -1,6 +1,39 @@
 ---
-// TODO:
-console.warn("todo navbar");
+import { site } from "../../config";
+
+const { url } = Astro;
+const { pathname } = url;
 ---
 
-<div><p>[todo: navbar]</p></div>
+<header class="masthead">
+  <div class="inner">
+    <h3 class="masthead-brand">
+      <a id="main-logo-link" href="/">
+        <img
+          id="logo"
+          src="img/logo-transparent.png"
+          class="img-fluid"
+          alt=""
+        />
+        <span class="anim-left" style="font-size: 0.8em">{site.title}</span>
+      </a>
+    </h3>
+
+    <nav class="nav nav-masthead justify-content-center">
+      {
+        site.menu.map((el) => {
+          const section = pathname.split("/")[1];
+          const isActive = section === el.sectionSlug;
+          return (
+            <a
+              href={`/${el.sectionSlug}`}
+              class:list={["nav-link", "anim-left", { active: isActive }]}
+            >
+              {el.name.toUpperCase()}
+            </a>
+          );
+        })
+      }
+    </nav>
+  </div>
+</header>

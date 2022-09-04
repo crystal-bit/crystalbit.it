@@ -3,6 +3,7 @@ import { site } from "../../config";
 import CookieConsent from "../components/CookieConsent.astro";
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
+import baseCss from "./base.scss";
 ---
 
 <!DOCTYPE html>
@@ -86,9 +87,8 @@ import Navbar from "../components/Navbar.astro";
         <!-- main slot -->
         <slot />
         <Footer />
+        <CookieConsent />
       </div>
     </div>
-
-    <CookieConsent />
   </body>
 </html>
