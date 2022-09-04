@@ -1,96 +1,234 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import Base from "../layouts/Base.astro";
+import { externalLinks } from "../../config";
 ---
 
-<Layout title="Welcome to Astro.">
-	<main>
-		<h1>Welcome to <span class="text-gradient">Astro</span></h1>
-		<p class="instructions">
-			Check out the <code>src/pages</code> directory to get started.<br />
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
-		</p>
-		<ul role="list" class="link-card-grid">
-			<Card
-				href="https://docs.astro.build/"
-				title="Documentation"
-				body="Learn how Astro works and explore the official API docs."
-			/>
-			<Card
-				href="https://astro.build/integrations/"
-				title="Integrations"
-				body="Supercharge your project with new frameworks and libraries."
-			/>
-			<Card
-				href="https://astro.build/themes/"
-				title="Themes"
-				body="Explore a galaxy of community-built starter themes."
-			/>
-			<Card
-				href="https://astro.build/chat/"
-				title="Chat"
-				body="Come say hi to our amazing Discord community. ❤️"
-			/>
-		</ul>
-	</main>
-</Layout>
-
+<!-- {{ define "customjs" }}
+{{ end }} --><!-- TODO: analytics  --><!-- {{ define "google-site-verification" }}
+    <meta name="google-site-verification" content="ngopHfEfc3BHJjzlusMn0cc1ko9CrXh-RwH03kvEffI" />    
+{{ end }} -->
 <style>
-	:root {
-		--astro-gradient: linear-gradient(0deg, #4f39fa, #da62c4);
-	}
+  h5.subheader {
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: Quantico;
+    text-transform: uppercase;
+    /* color: var(--gray); */
+  }
 
-	h1 {
-		margin: 2rem 0;
-	}
-
-	main {
-		margin: auto;
-		padding: 1em;
-		max-width: 60ch;
-	}
-
-	.text-gradient {
-		font-weight: 900;
-		background-image: var(--astro-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 100% 200%;
-		background-position-y: 100%;
-		border-radius: 0.4rem;
-		animation: pulse 4s ease-in-out infinite;
-	}
-
-	@keyframes pulse {
-		0%,
-		100% {
-			background-position-y: 0%;
-		}
-		50% {
-			background-position-y: 80%;
-		}
-	}
-
-	.instructions {
-		line-height: 1.6;
-		margin: 1rem 0;
-		background: #4f39fa;
-		padding: 1rem;
-		border-radius: 0.4rem;
-		color: var(--color-bg);
-	}
-
-	.instructions code {
-		font-size: 0.875em;
-		border: 0.1em solid var(--color-border);
-		border-radius: 4px;
-		padding: 0.15em 0.25em;
-	}
-
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 1rem;
-		padding: 0;
-	}
+  h5.subheader span {
+    /* color: aqua; */
+    background-color: var(--green-a05);
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+  }
 </style>
+
+<Base>
+  <main id="landing" role="main" class="cover">
+    <div class="headline">
+      <div class="card-overlap">
+        <!-- <img id="logo" src={{ "img/logo-transparent.png" | relURL }} class="img-fluid" alt=""> -->
+        <!-- Tagline -->
+        <h1 class="text-center mb-4">IMPARA A PROGRAMMARE VIDEOGIOCHI</h1>
+        <h5 class="text-center subheader mb-3">
+          CON
+          <span>Tutorial</span>,
+          <span>live coding</span>,
+          <span>giochi</span> ed una <span>community</span> di sviluppatori
+        </h5>
+      </div>
+    </div>
+
+    <div class="tutorial rounded-container mt-5">
+      <div class="row rounded-container-overlap extra-padding">
+        <div class="text-center col-12">
+          <h2 class="pb-2">TUTORIAL</h2>
+        </div>
+
+        <div class="col-md-12">
+          <div class="row m-2">
+            <div
+              class="col-md-6 embed-responsive embed-responsive-16by9 my-auto"
+            >
+              <iframe
+                class="embed-responsive-item"
+                src="https://www.youtube.com/embed/videoseries?list=PLaCq3HqKQR6rlPpf2GAOXp52ddt0V71Yl"
+                frameborder="0"
+                style="padding: unset; max-height: 180px;"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              >
+              </iframe>
+            </div>
+            <div class="col-md-6 p-4">
+              <h5>Sviluppare il primo gioco con Godot Engine 3</h5>
+              <ul>
+                <li>Movimento top-down 2D</li>
+                <li>TileMap e TileSet</li>
+                <li>Collisioni 2D</li>
+                <li>Animazioni spritesheet</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="row m-2">
+            <div class="col-md-6 p-4">
+              <h5>Sviluppare un puzzle game mobile</h5>
+              <ul>
+                <li>Input touch</li>
+                <li>Gestione risoluzione e aspect ratio</li>
+                <li>Fisica 2D</li>
+                <li>Remote debugging & profiling</li>
+              </ul>
+            </div>
+            <div
+              class="col-md-6 embed-responsive embed-responsive-16by9 my-auto"
+            >
+              <iframe
+                class="embed-responsive-item"
+                src="https://www.youtube.com/embed/videoseries?list=PLaCq3HqKQR6rNyqulBsbca-6wzxp8H52r"
+                frameborder="0"
+                style="padding: unset; max-height: 180px;"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              >
+              </iframe>
+            </div>
+          </div>
+          <hr class="mb-4" style="border-color: rgba(127, 218, 189, 0.2);" />
+          <div class="col-md-12 text-center">
+            <p>
+              100+ video su tool e programmi open source, principalmente Godot
+            </p>
+            <a
+              class="btn mt-1"
+              href={externalLinks.youtubeChannel}
+              role="button"
+            >
+              <i class="fa fa-youtube" aria-hidden="true"></i> YOUTUBE
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="games rounded-container mt-5">
+      <div class="row rounded-container-overlap extra-padding">
+        <div class="text-center col-12">
+          <h2 class="pb-2">GIOCHI</h2>
+        </div>
+        <div class="col-md-12">
+          <div class="row m-2">
+            <div class="col-md-4 my-auto">
+              <img src="/img/defending-todot.webp" alt="" class="img-fluid" />
+            </div>
+            <div class="col-md-8 p-4 my-auto">
+              <h5>Defending Todot</h5>
+              <p>
+                Tower defense ispirato a Kingdom Rush. Sviluppato durante
+                l'hacktoberfest 2020 con la community.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="row m-2 text-right">
+            <div class="col-md-8 p-4 my-auto">
+              <h5>Space Shooter</h5>
+              <p>
+                Shooter game a scorrimento orizzontale. Sviluppato durante
+                l'hacktoberfest 2019 con la community.
+              </p>
+            </div>
+            <div class="col-md-4 my-auto">
+              <img src="/img/space-shooter.webp" alt="" class="img-fluid" />
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 text-center">
+          <hr class="mb-4" style="border-color: rgba(127, 218, 189, 0.2);" />
+          <p>Codice sorgente e asset dei giochi su GitHub</p>
+          <a
+            class="btn mt-1"
+            href="https://github.com/crystal-bit"
+            role="button"
+          >
+            <i class="fa fa-github" aria-hidden="true"></i> GITHUB
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="live-coding rounded-container mt-5">
+      <div class="row rounded-container-overlap extra-padding">
+        <div class="text-center col-12">
+          <h2 class="pb-3">LIVE CODING</h2>
+        </div>
+        <div class="col-md-12">
+          <!-- Add a placeholder for the Twitch embed -->
+          <div id="twitch-embed"></div>
+
+          <!-- Load the Twitch embed script -->
+          <script src="https://player.twitch.tv/js/embed/v1.js"></script>
+
+          <!-- Create a Twitch.Player object. This will render within the placeholder div -->
+          <script type="text/javascript">
+            new Twitch.Player("twitch-embed", {
+              collection: "ypp4CY71rRaYgA",
+              video: "1153359819",
+              height: 395,
+              width: "100%",
+              autoplay: false,
+            });
+          </script>
+        </div>
+        <div class="col-md-12 text-center">
+          <hr class="mb-4" style="border-color: rgba(127, 218, 189, 0.2);" />
+          <p>
+            Stream di programmazione, studio e chiacchiere con la community!
+          </p>
+          <a
+            class="btn mt-1"
+            role="button"
+            href="https://www.twitch.tv/crystal_bit"
+          >
+            <i class="fa fa-twitch" aria-hidden="true"></i> TWITCH
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="follow-project rounded-container mt-5">
+      <div class="rounded-container-overlap extra-padding">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h2>SEGUI IL PROGETTO</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-center">
+            <p>
+              <a class="btn" role="button" href={externalLinks.discord}>
+                <i class="fab fa-discord" aria-hidden="true"></i> DISCORD
+              </a>
+            </p>
+            <p>Community.</p>
+          </div>
+          <div class="col text-center">
+            <p>
+              <a class="btn" role="button" href={externalLinks.telegram}>
+                <i class="fa fa-telegram" aria-hidden="true"></i> TELEGRAM
+              </a>
+            </p>
+            <p>Annunci, novità, retroscena.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Base>
