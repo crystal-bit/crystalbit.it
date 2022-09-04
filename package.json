@@ -10,6 +10,8 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@fontsource/chakra-petch": "^4.5.8",
+    "@fontsource/quantico": "^4.5.9",
     "@justinribeiro/lite-youtube": "^1.4.0",
     "astro": "^1.1.5"
   },

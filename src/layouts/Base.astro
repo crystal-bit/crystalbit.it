@@ -2,6 +2,8 @@
 import { site } from "../../config";
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
+import "@fontsource/quantico";
+import "@fontsource/chakra-petch";
 import baseCss from "./base.scss";
 ---
 
@@ -38,14 +40,8 @@ import baseCss from "./base.scss";
     </slot>
 
     <!-- Dependencies -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Quantico"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Chakra+Petch"
-      rel="stylesheet"
-    />
+    <!-- TODO: use local fonts https://fontsource.org/docs/getting-started -->
+
     <link
       href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i&display=swap"
       rel="stylesheet"
@@ -68,9 +64,6 @@ import baseCss from "./base.scss";
       integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
       crossorigin="anonymous"
     />
-
-    <!-- TODO: rename  -->
-    <slot name="additional-dependencies" />
   </head>
 
   <body>
