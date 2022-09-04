@@ -12,11 +12,30 @@
 
 <script client:visible src="https://player.twitch.tv/js/embed/v1.js"></script>
 <script client:visible>
-  new Twitch.Player("twitch-embed", {
-    collection: "ypp4CY71rRaYgA",
-    video: "1153359819",
-    height: 395,
-    width: "100%",
-    autoplay: false,
-  });
+  const div = document.querySelector("#twitch-embed");
+
+  function handleIntersection(entries) {
+    entries.map((entry) => {
+      if (entry.isIntersecting) {
+        if (div.children.length === 0) {
+          initTwitch();
+        }
+        // entry.target.classList.add("visible");
+      } else {
+        // entry.target.classList.remove("visible");
+      }
+    });
+  }
+
+  function initTwitch() {
+    new Twitch.Player("twitch-embed", {
+      collection: "ypp4CY71rRaYgA",
+      video: "1153359819",
+      height: 395,
+      width: "100%",
+      autoplay: false,
+    });
+  }
+  const observer = new IntersectionObserver(handleIntersection);
+  observer.observe(div);
 </script>
