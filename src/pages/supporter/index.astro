@@ -1,0 +1,193 @@
+---
+import Base from "../../layouts/Base.astro";
+import paypal from "./img/paypal.png";
+import twitch from "./img/twitch.png";
+import { supporters } from "../../data/supporters";
+import { Image } from "@astrojs/image/components";
+---
+
+<style>
+  img {
+    width: 200px;
+  }
+  span.badge {
+    margin: 0.1em;
+  }
+</style>
+
+<Base>
+  <section id="supporter">
+    <div class="card rounded-container my-3">
+      <div class="card-body rounded-container-overlap">
+        <div class="row my-3">
+          <div class="col-md-12">
+            <h2>SUPPORTA IL PROGETTO</h2>
+            <p>
+              Grazie al supporto della community posso continuare a creare
+              contenuti open source e liberi da pubblicità sullo sviluppo di
+              videogiochi.
+            </p>
+          </div>
+        </div>
+
+        <!-- Twitch -->
+        <div class="row" style="margin-bottom: 2em; margin-top: 2em;">
+          <div class="col-sm-1"></div>
+          <div class="col-sm-4 text-center">
+            <a
+              class="avoid-link-underline"
+              href="https://www.twitch.tv/crystal_bit/about"
+            >
+              <Image src={twitch} class="img-fluid" alt="Twitch logo" />
+            </a>
+          </div>
+          <div class="col-sm-6">
+            <p>
+              <a type="submit" href="https://www.twitch.tv/crystal_bit"
+                >Abbonamento Twitch</a
+              >, gratuito se hai Amazon Prime! <br />
+              <small style="color: rgba(255,255,255, .5);">
+                *Sblocca il ruolo <em>Twitch Subscriber</em> sul server Discord!
+              </small>
+            </p>
+          </div>
+        </div>
+
+        <!-- Streamlabs / Paypal -->
+        <div
+          id="paypal-row"
+          class="row"
+          style="margin-bottom: 2em; margin-top: 2em;"
+        >
+          <div class="col-sm-1"></div>
+          <div class="col-sm-4 text-center">
+            <a
+              class="avoid-link-underline"
+              href="https://streamlabs.com/crystalbit/tip"
+            >
+              <Image src={paypal} class="img-fluid" alt="Paypal logo" />
+            </a>
+          </div>
+          <div class="col-sm-6">
+            <p>
+              <a href="https://paypal.me/crystalbit">Donazione PayPal</a>
+              <!-- • <a
+                id="paypal-link"
+                href="https://streamlabs.com/crystalbit/tip"
+              >
+                Donazione PayPal (streamlabs)</a
+              > se vuoi inviare un messaggio visibile durante una live -->
+            </p>
+          </div>
+        </div>
+
+        <!-- ALTRO -->
+        <div class="row mt-4 mb-3">
+          <div class="col-sm-1"></div>
+          <div class="col-sm-4 text-center">
+            <h3>ALTRO?</h3>
+          </div>
+          <div class="col-sm-5">
+            <p>
+              Contattami via <a href="mailto:vitrumbit@gmail.com">email</a>
+            </p>
+          </div>
+          <div class="col-sm-1"></div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <h3>SUPPORTER</h3>
+            <p>
+              Una lista all time di chi ha supportato il progetto. Grazie a
+              tutti!
+            </p>
+            <p
+              id="supporters-paragraph"
+              style="font-size: 120%; color: rgb(230,230,230);"
+            >
+              {
+                supporters.map((supporter) => {
+                  return <span class="badge"> {supporter} </span>;
+                })
+              }
+            </p>
+
+            <style>
+              .badge {
+                transition: transform 0.2s ease-out;
+              }
+
+              .badge:hover {
+                transform: scale(1.2, 1.2);
+                transition: transform 0.1s ease-out;
+              }
+            </style>
+
+            <p>
+              <small style="color: rgba(255,255,255, .5);">
+                Contattatemi in caso di qualsiasi problema con la lista dei
+                supporter!
+              </small>
+            </p>
+
+            <h3>A COSA SERVONO LE DONAZIONI</h3>
+            <p>Principalmente:</p><ul>
+              <li>Potrò dedicare più tempo alla creazione di contenuti</li>
+              <li>Mantenere il progetto libero da pubblicità e paywall</li>
+            </ul>
+
+            Le conseguenze concrete saranno:
+
+            <ul>
+              <li>Più video tutorial e guide</li>
+              <li>Migliore qualità dei contenuti</li>
+              <li>
+                Studio di nuovi argomenti e tecnologie (e quindi altri tutorial)
+              </li>
+              <li>
+                Nuove iniziative per la community come Space Shooter e Defending
+                Todot
+              </li>
+              <li>
+                Fixare e aggiornare i progetti open source dell'organizzazione
+                Github
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script client:visible>
+  const p = document.getElementById("supporters-paragraph");
+  const els = p.getElementsByTagName("span");
+  let i = 0;
+  const colStep = 255 / els.length;
+
+  const delta = 16;
+  const duration = 3; // sec
+  let elapsed = 0;
+  setInterval(() => {
+    let i = 0;
+    elapsed += delta / 1000;
+    for (const span of els) {
+      const t = 2 * Math.PI * elapsed;
+      const rgbMin = [
+        20 + 40 * Math.sin(t / 2),
+        30 + 40 * Math.sin(4 + t / 4),
+        90,
+      ];
+      span.col = [
+        rgbMin[0] + ((Math.sin(i + t / duration) + 1) / 2) * 60,
+        rgbMin[1] + ((Math.sin(i + t / duration) + 1) / 2) * 140,
+        rgbMin[2] + ((Math.sin(i + t / duration) + 1) / 2) * 100,
+      ];
+      span.style.backgroundColor = `rgb(${span.col[0]}, ${span.col[1]}, ${span.col[2]})`;
+      i++;
+      // span.style.fontSize = `${20 * (1 - 0.1 * Math.sin(i + elapsed))}px`;
+    }
+  }, delta);
+</script>
