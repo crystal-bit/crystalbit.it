@@ -2,16 +2,9 @@
 import Base from "../layouts/Base.astro";
 import TwitchEmbed from "../components/TwitchEmbed.astro";
 import { externalLinks } from "../../config";
+import "@justinribeiro/lite-youtube";
 ---
 
-<script>
-  import "@justinribeiro/lite-youtube";
-</script>
-
-<!-- {{ define "customjs" }}
-{{ end }} --><!-- TODO: analytics  --><!-- {{ define "google-site-verification" }}
-    <meta name="google-site-verification" content="ngopHfEfc3BHJjzlusMn0cc1ko9CrXh-RwH03kvEffI" />    
-{{ end }} -->
 <style>
   h5.subheader {
     font-size: 1rem;
@@ -156,9 +149,6 @@ import { externalLinks } from "../../config";
           <h2 class="pb-3">LIVE CODING</h2>
         </div>
         <div class="col-md-12">
-          <!-- Add a placeholder for the Twitch embed -->
-          <!-- Load the Twitch embed script -->
-          <!-- Create a Twitch.Player object. This will render within the placeholder div -->
           <TwitchEmbed />
         </div>
         <div class="col-md-12 text-center">

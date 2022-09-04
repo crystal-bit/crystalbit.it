@@ -10,8 +10,9 @@
 
 <div id="twitch-embed"></div>
 
-<script client:visible src="https://player.twitch.tv/js/embed/v1.js"></script>
-<script client:visible>
+<script client:visible defer src="https://player.twitch.tv/js/embed/v1.js"
+></script>
+<script client:visible defer>
   const div = document.querySelector("#twitch-embed");
 
   function handleIntersection(entries) {
