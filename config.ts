@@ -9,7 +9,7 @@ export const site = {
 };
 
 export const externalLinks = {
-  youtubeChannel: "TODO:",
-  telegram: "",
-  discord: "",
+  youtubeChannel: "https://www.youtube.com/c/CrystalBit",
+  telegram: "https://t.me/crystalbit",
+  discord: "https://discord.gg/SA6S2Db",
 };
