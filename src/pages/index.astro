@@ -1,6 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
 import TwitchEmbed from "../components/TwitchEmbed.astro";
+import Icon from "../components/Icon/Icon.astro";
+
 import { externalLinks } from "../../config";
 ---
 
@@ -90,7 +92,7 @@ import { externalLinks } from "../../config";
               href={externalLinks.youtubeChannel}
               role="button"
             >
-              <i class="fa fa-youtube" aria-hidden="true"></i> YOUTUBE
+              <Icon iconId="youtube" /> YOUTUBE
             </a>
           </div>
         </div>
@@ -140,7 +142,7 @@ import { externalLinks } from "../../config";
             href="https://github.com/crystal-bit"
             role="button"
           >
-            <i class="fa fa-github" aria-hidden="true"></i> GITHUB
+            <Icon iconId="github" /> GITHUB
           </a>
         </div>
       </div>
@@ -164,7 +166,7 @@ import { externalLinks } from "../../config";
             role="button"
             href="https://www.twitch.tv/crystal_bit"
           >
-            <i class="fa fa-twitch" aria-hidden="true"></i> TWITCH
+            <Icon iconId="twitch" /> TWITCH
           </a>
         </div>
       </div>
@@ -181,7 +183,7 @@ import { externalLinks } from "../../config";
           <div class="col text-center">
             <p>
               <a class="btn" role="button" href={externalLinks.discord}>
-                <i class="fab fa-discord" aria-hidden="true"></i> DISCORD
+                <Icon iconId="discord" /> DISCORD
               </a>
             </p>
             <p>Community.</p>
@@ -189,7 +191,7 @@ import { externalLinks } from "../../config";
           <div class="col text-center">
             <p>
               <a class="btn" role="button" href={externalLinks.telegram}>
-                <i class="fa fa-telegram" aria-hidden="true"></i> TELEGRAM
+                <Icon iconId="telegram" /> TELEGRAM
               </a>
             </p>
             <p>Annunci, novità, retroscena.</p>

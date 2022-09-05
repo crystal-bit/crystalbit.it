@@ -1,0 +1,34 @@
+---
+export interface Props {
+  width?: string;
+  height?: string;
+  iconId: string;
+}
+
+const { width, height, iconId } = Astro.props;
+
+const style: any = {};
+if (width) {
+  style.width = width;
+}
+if (height) {
+  style.height = height;
+}
+
+let icon;
+try {
+  icon = (await import(`./assets/${iconId}.svg`)).default;
+} catch (err) {
+  console.error("SVG Icon not found " + `./assets/${iconId}.svg`);
+  console.log(err);
+}
+---
+
+<style>
+  img {
+    width: 1em;
+    height: 1em;
+  }
+</style>
+
+<img src={icon} class="img" style={style} />

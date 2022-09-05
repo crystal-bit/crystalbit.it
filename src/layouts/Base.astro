@@ -4,7 +4,7 @@ import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 import "@fontsource/quantico";
 import "@fontsource/chakra-petch";
-import baseCss from "./base.scss";
+import "./base.scss";
 ---
 
 <!DOCTYPE html>
@@ -40,8 +40,6 @@ import baseCss from "./base.scss";
     </slot>
 
     <!-- Dependencies -->
-    <!-- TODO: use local fonts https://fontsource.org/docs/getting-started -->
-
     <link
       href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i&display=swap"
       rel="stylesheet"
@@ -57,17 +55,10 @@ import baseCss from "./base.scss";
       integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
       crossorigin="anonymous"
     />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
-      integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-      crossorigin="anonymous"
-    />
   </head>
 
   <body>
     <!-- Dependencies -->
-    <script src="https://use.fontawesome.com/03364e4af9.js" defer></script>
 
     <slot name="customjs" />
 
