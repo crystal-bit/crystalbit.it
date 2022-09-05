@@ -36,7 +36,7 @@ const { pathname } = url;
           const section = pathname.split("/")[1];
           const isActive = section === el.sectionSlug;
           const isWip = ["posts", "guide"].includes(el.sectionSlug);
-          const href = isWip ? "#" : el.sectionSlug;
+          const href = `/${isWip ? "#" : el.sectionSlug}`;
           return (
             <a
               href={href}
