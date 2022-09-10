@@ -1,18 +1,23 @@
 ---
 export interface Props {
+  iconId: string;
   width?: string;
   height?: string;
-  iconId: string;
+  css?: object;
 }
 
-const { width, height, iconId } = Astro.props;
+const { width, height, iconId, css } = Astro.props;
 
-const style: any = {};
+let style: any = {};
 if (width) {
   style.width = width;
 }
 if (height) {
   style.height = height;
+}
+
+if (css) {
+  Object.assign(style, css);
 }
 
 let icon;
