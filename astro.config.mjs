@@ -10,7 +10,9 @@ export default defineConfig({
   trailingSlash: "ignore",
   output: "static",
   integrations: [mdx(), image()],
+
   markdown: {
     remarkPlugins: [remarkReadingTime, excerpt],
+    syntaxHighlight: "prism",
   },
 });

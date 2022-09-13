@@ -38,7 +38,7 @@ effettuare operazioni.
 
 Detto così non aiuta molto, quindi vediamo un esempio di GDScript.
 
-```gd
+```gdscript
 var a = 10
 ```
 
@@ -47,7 +47,7 @@ precisi) all'interno della _variabile_ `a`.
 
 Proviamo ora ad analizzare questo codice:
 
-```gd
+```gdscript
 var x
 ```
 
@@ -60,7 +60,7 @@ Se state pensando _"x non contiene niente"_, la risposta è sbagliata.
 
 Per convincervi provate ad eseguire questo codice:
 
-```gd
+```gdscript
 var x
 var y = null
 
@@ -95,7 +95,7 @@ sia per il 2D che per il 3D._
 Supponiamo di voler nascondere la sprite appena il gioco viene avviato. Per farlo
 aggiungiamo questo script a `Node2D`:
 
-```gd
+```gdscript
 extends Node2D
 
 func _ready():
@@ -162,7 +162,7 @@ Ora possiamo intuire che deve esserci stato un errore
 nell'inizializzazione di `sprite`. Riprendiamo il codice e correggiamo
 la riga 5 scrivendo:
 
-```gd
+```gdscript
 var sprite = get_node("Sprite")
 ```
 
