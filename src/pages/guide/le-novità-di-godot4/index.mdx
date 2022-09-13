@@ -1,0 +1,302 @@
+---
+title: "Le novità di Godot 4"
+layout: "@layouts/Guide.astro"
+creationDate: 2022-02-28
+updateDate: 2022-06-18
+id: 3
+draft: false
+tags: [Godot Engine 4]
+---
+
+import { Image, Picture } from "@astrojs/image/components";
+import thumb from "./thumb.png";
+import imgServer from "./img/download-server.png";
+import imgGodotBugs from "./img/godot-bugs.png";
+import imgPixelArtPreset from "./img/pixel-art-preset.png";
+import imgGodot4NewProject from "./img/godot4-new-project.png";
+import YoutubeEmbed from "@components/YoutubeEmbed.astro";
+
+---
+
+Di recente sta crescendo l’interesse verso Godot Engine 4. Ho raccolto qui tutte
+le informazioni più utili per chi sta valutando l'utilizzo di questo engine open
+source.
+
+<Image src={import("./img/godot4-editor.png")} />
+
+**⚠️ Avvertimento**: se avete un progetto in sviluppo con Godot 3 allora
+continuate su quella versione, a meno che non abbiate un valido motivo per fare
+l’upgrade. Godot 4 non è ancora pronto per l'utilizzo in produzione.
+
+## Qual è l'ultima versione disponibile?
+
+<Image src={imgServer} />
+
+L'ultima versione disponibile è **Godot Engine 4 alpha10** (al tempo della
+scrittura di questa guida).
+
+Potete trovare le build ufficiali a questo link:
+[downloads.tuxfamily.org/godotengine/4.0/](https://downloads.tuxfamily.org/godotengine/4.0/)
+
+Da qui in avanti ci riferiremo a _Godot 4 alpha_ chiamandolo semplicemente _Godot
+4_ per brevità.
+
+Con _Godot 3_ ci si riferirà invece all'ultima versione stabile di Godot 3, che
+al tempo della scrittura è Godot 3.4.4.
+
+## Stabilità dell’engine
+
+<Image
+  width={500}
+  aspectRatio={16 / 9}
+  src="https://godotengine.org/storage/app/uploads/public/5e3/0a6/083/5e30a6083a68f545209322.png"
+/>
+
+**Godot 4 è ancora in versione alpha, quindi è altamente instabile**.
+
+Sia il codice che la UI potrebbero cambiare nelle prossime settimane, è quindi
+sconsigliato utilizzare Godot 4 nella maggior parte dei casi.
+
+<Image src={imgGodotBugs} />
+
+Attualmente:
+
+- **Non esiste una guida ufficiale per il porting** (anche perché
+  l’engine è ancora in sviluppo).
+  - Potrebbe esserne rilasciata una ufficiale in futuro
+    ([godot-docs/issues/4960](https://github.com/godotengine/godot-docs/issues/4960)).
+  - Esistono guide non ufficiali come: [Unofficial Godot 4.0 Migration/Upgrade
+    guide](https://gist.github.com/WolfgangSenff/168cb0cbd486c8c9cd507f232165b976)
+
+### Un tutorial per la versione alpha
+
+Siete proprio curiosi di cominciare a sviluppare con Godot e non volete aspettare la release stabile?
+
+Ho fatto un video tutorial completo che trovate su YouTube!
+
+<YoutubeEmbed videoId="uRzloUV0v0Y" />
+
+## Upgrade da Godot 3 a Godot 4
+
+Dalla versione Godot Engine 4 alpha 10 è possibile utilizzare il convertitore
+ufficiale ([PR](https://github.com/godotengine/godot/pull/51950)), disponibile
+da riga di comando usando il parametro `--convert-3to4`.
+
+Il convertitore può generare bug e corrompere il progetto, quindi fate
+sempre un backup prima di provare questo strumento!
+
+## Renderer Vulkan/OpenGL
+
+Una delle principali novità di Godot 4 è la riscrittura del motore grafico.
+Le librerie utilizzate saranno **Vulkan** ed OpenGL ES 3.0.
+
+Vulkan è uno standard (open) per computer grafica moderna. Rispetto ad OpenGL,
+offre più controllo sulla GPU e quindi migliori performance.
+
+<img src="https://godotengine.org/storage/app/uploads/public/5da/233/dd4/5da233dd4d90a731626797.gif" />
+
+### Cambiamenti nel nuovo renderer
+
+Il renderer viene offerto nelle modalità `Clustered` e `Mobile`. Il primo per
+una grafica più avanzata, il secondo per applicazioni più semplici.
+
+<Image src={imgGodot4NewProject} />
+
+Tra le novità troviamo la compilazione degli shader in multi-threading e la
+possibilità di importare shader GLSL4.50 (con estensioni Vulkan). Notizia che
+farà felice gli utilizzatori di Shadertoy!
+
+Inoltre, a differenza di Godot 3, gli shader sono compilati (e memorizzati in
+cache) al caricamento. Questo meccanismo riduerrà lo stutter nelle prime fasi di
+avvio di una scena di gioco. Problema che in passato era comune sia nei giochi
+2D che 3D.
+
+<video
+  src="https://godotengine.org/storage/app/media/antialias.mp4"
+  muted
+  autoplay
+  controls
+/>
+
+Il nuovo renderer migliora:
+
+- Subsurface scattering
+- Screen space reflection
+- Screen space ambient occlusion (SSAO)
+- MSAA, FXAA e Specular anti-aliasing
+- Glow/bloom
+- Depth of field
+
+<img src="https://godotengine.org/storage/app/uploads/public/5db/e1d/ed1/5dbe1ded186e6248184679.gif" />
+
+Tra le nuove funzionalità introdotte troviamo:
+
+- Global Illumination (grazie al contributo di Matias Goldberg di Ogre3D)
+  - con supporto ad oggetti dinamici
+  - i cambiamenti di luce, posizione e parametri avranno impatto immediato sulla scena
+- Soft shadows
+- Decals
+- Light projectors
+
+Ci sono state anche alcune modifiche nella nomenclatura:
+
+- i nodi 3D avranno il suffisso "3D" alla fine del nome, avendo consistenza con
+  quanto c'è già nei nodi 2D
+- la classe `SpatialMaterial` è stata rinominata in `StandardMaterial`
+- il nodo `Spatial` è stato rinominato in `Node3D`, per maggior chiarezza
+
+### Limitazioni attuali
+
+Attualmente ci sono diverse limitazioni con Godot 4:
+
+- non è possibile esportare progetti Vulkan in HTML5.
+- potete eseguire Godot 4 solamente se avete una scheda video che offre driver
+  Vulkan.
+- non è attualmente implementato il renderer OpenGL 3.0, ma è in sviluppo
+
+### Altre info sul renderer
+
+Esiste una serie di blog post ufficiali per approfondire il lavoro fatto sul
+motore di rendering, lo trovate su
+[godotengine.org/article/vulkan-progress-report-1](https://godotengine.org/article/vulkan-progress-report-1).
+
+## Shader
+
+🔨 _Sto ancora preparando questa sezione! Sarà pronta tra qualche giorno :)_
+
+## Engine core
+
+> Loading resources in threads is now much more efficient, because both textures
+> and meshes can be created in sub-threads at no cost at all for the main thread.
+> This paves the way to multithreaded resource loading, which will be implemented
+> later
+
+## Documentazione
+
+- La documentazione per Godot 4 la potete trovare selezionando la versione
+  “latest” dal sito ufficiale. Il link esatto è questo
+  https://docs.godotengine.org/en/latest/
+- **La documentazione contiene molte pagine che ancora non sono state aggiornate
+  alla versione 4.**
+
+**"Come faccio a sapere se la documentazione è aggiornata?"**  
+Guardate in alto a destra in qualsiasi pagina della documentazione: cliccate sul
+pulsante “Edit on GitHub” e vi si aprirà il codice sorgente della pagina di  
+documentazione.
+Cliccate su “History” (sempre in alto a destra) e troverete la lista delle
+modifiche che sono state fatte su quella pagina.  
+Leggendo la descrizione del commit e la loro data, potrete intuire se la pagina
+è aggiornata o meno.
+
+## 📝 GDScript
+
+> 🔨 Questa sezione è ancora in lavorazione.
+
+GDScript è il principale linguaggio di scripting di Godot Engine, la sua sintassi è simile a quella di Python e Lua.
+
+In Godot 4 è stato migliorato notevolmente, senza stravolgere la sintassi per
+l'utente: chi ha confidenza con Godot 3, si sentirà a suo agio nell'utilizzare
+Godot 4.
+
+Potete seguire tutte le novità leggendo
+[questi progress report](https://godotengine.org/article/gdscript-progress-report-writing-tokenizer)
+ufficiali.
+
+In breve:
+
+- lo _static typing_, quando presente, migliorerà le performance di esecuzione
+  ([ne ho parlato in questo video](https://youtu.be/AWThTxbHibs))
+- la parola chiave `await` rimpiazza `yield`
+- aggiunta la parola chiave `super` al posto di `.`
+- i tipi enumerativi potranno essere usati come tipo di una variabile (in
+  passato era già possibile farne l'export)
+- sono stati aggiunti gli array tipizzati `var my_array: Array[int] = [1, 2, 3]`
+- sono state aggiunte le funzioni lambda, e le funzioni sono diventate un
+  _"first class citizen"_ grazie alla classe `Callable`.
+
+```gd
+func _ready():
+  var my_lambda = func(x):
+      print(x)
+  # my_lamba è di tipo Callable
+  my_lambda.call("hello")
+```
+
+- grazie ai `Callable`, Godot permette un approccio funzionale alla
+  programmazione. Se volete approfondire vi consiglio questo talk di Geroge
+  Marques (principale maintainer di GDScript): [Functional programming and
+  applications on GDScript](https://youtu.be/uCnZ0aL0OwQ)
+- è possibile usare l'operatore `match` per eseguire rami di codice in base
+  al tipo del parametro
+- è stato aggiunto un sistema di annotazioni, che si distinguono dal simbolo
+  `@`. Ad esempio: `@master`, `@puppet`, `@remote`
+- anche gli export sono annotazioni: `@export var my_number: int`
+- `setget` è stato rimpiazzato dalle _properties_
+  > unlike setget properties always call their setter/getter even inside the
+  > same class. This gives users a consistent behavior which won't cause
+  > confusion or lead to potential mistakes during a refactor.
+- ora è possibile generare automaticamente documentazione navigabile per i
+  propri nodi
+
+## C# / Mono
+
+La versione finale di Godot 4 supporterà lo scripting anche con C#.
+
+Attualmente però non esistono build con il supporto a Mono.
+
+## Giochi Pixel Art
+
+Per i giochi pixel art sono cambiate un paio di cose:
+
+1. impostazione filtro texture
+2. aggiunta dei classi specifiche per numeri interi: `Vector2i`, `Rect2i`, `Vector3i`.
+
+Per il filtro delle texture è ora possibile specificare i filtri su ogni Nodo di
+tipo CanvasItem. I nodi figli erediteranno l'impostazione del nodo padre.
+
+Inoltre se sapete già che volete utilizzare un certo tipo di filtro per tutte le scene, potete selezionare direttamente l'opzione dai Project Settings come mostrato in [questa parte del tutorial](https://youtu.be/uRzloUV0v0Y?t=587).
+
+<Image src={imgPixelArtPreset} />
+
+## 🆕 Altre Novità
+
+Questa guida non è sufficiente? Se volete una lettura approfondita e completa,
+fate riferimento al
+[CHANGELOG](https://github.com/godotengine/godot/blob/master/CHANGELOG.md)
+ufficiale.
+
+Se vuoi sapere quando nuove versioni di questa guida saranno disponibili, segui
+il [canale Telegram](https://t.me/crystalbit) Crystal Bit!
+
+---
+
+## Nodi
+
+Molti nodi sono stati aggiornati con un suffisso esplicito per rendere chiara
+l'appartenenza al 2D o 3D.
+
+Ad esempio: ora i nodi per gestire sprite si chiamano `Sprite2D` e `Sprite3D`.
+
+Grazie alla funzionalità "Scene Unique Nodes" è ora possibile utilizzare
+`get_node("%NodoUnico")` per accedere ai nodi che sono stati marcati come unici
+all'interno della scena.
+
+### Nodo TileMap
+
+🔨 _Sto ancora preparando questa sezione! Sarà pronta tra qualche giorno :)_
+
+### Nodo "Window"
+
+> Additionally, the root node in Godot (get_tree().get_root()), which used to be
+> of type Viewport, has now changed to be of Window type. If you want to manage
+> the game window, simple access this node directly.
+
+https://godotengine.org/article/core-refactoring-progress-report-2
+
+### Supporto finestre multiple
+
+🔨 _Sto ancora preparando questa sezione! Sarà pronta tra qualche giorno :)_
+
+## Motore Fisico
+
+🔨 _Sto ancora preparando questa sezione! Sarà pronta tra qualche giorno :)_
