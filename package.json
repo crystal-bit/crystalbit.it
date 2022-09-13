@@ -13,12 +13,12 @@
     "@fontsource/chakra-petch": "^4.5.8",
     "@fontsource/quantico": "^4.5.9",
     "@justinribeiro/lite-youtube": "^1.4.0",
-    "astro": "^1.1.5",
+    "astro": "^1.2.3",
     "mdast-util-to-string": "^3.1.0",
     "reading-time": "^1.5.0"
   },
   "devDependencies": {
-    "@astrojs/image": "^0.5.0",
+    "@astrojs/image": "^0.7.0",
     "@astrojs/mdx": "^0.11.1",
     "sass": "^1.54.8"
   }
