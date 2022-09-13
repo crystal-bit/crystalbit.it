@@ -1,4 +1,5 @@
 ---
+import { Image } from "@astrojs/image/components";
 import { site } from "../../config";
 
 const { url } = Astro;
@@ -20,11 +21,13 @@ const { pathname } = url;
   <div class="inner">
     <h3 class="masthead-brand">
       <a id="main-logo-link" href="/">
-        <img
+        <Image
+          class="img-fluid"
           id="logo"
           src="img/logo-transparent.png"
-          class="img-fluid"
-          alt=""
+          width={50}
+          height={50}
+          alt="Crystal Bit Logo"
         />
         <span class="anim-left" style="font-size: 0.8em">{site.title}</span>
       </a>
@@ -35,7 +38,7 @@ const { pathname } = url;
         site.menu.map((el) => {
           const section = pathname.split("/")[1];
           const isActive = section === el.sectionSlug;
-          const isWip = ["posts", "guide"].includes(el.sectionSlug);
+          const isWip = ["posts"].includes(el.sectionSlug);
           const href = `/${isWip ? "#" : el.sectionSlug}`;
           return (
             <a

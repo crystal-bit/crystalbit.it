@@ -1,0 +1,13 @@
+---
+interface Props {
+  videoId: string;
+}
+
+const { videoId } = Astro.props;
+---
+
+<script>
+  import "@justinribeiro/lite-youtube";
+</script>
+
+<lite-youtube videoid={videoId} />

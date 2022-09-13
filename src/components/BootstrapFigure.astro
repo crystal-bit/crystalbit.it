@@ -1,0 +1,24 @@
+---
+interface Props {
+  caption: string;
+  link: string;
+  alt?: string;
+  cssClass?: string;
+}
+
+const { link, alt, cssClass, caption } = Astro.props;
+---
+
+<div class="text-center my-4">
+  <figure class="figure my-0">
+    <a href={link}>
+      <slot />
+    </a>
+
+    <figcaption class="figure-caption">
+      <p class="small">
+        {caption}
+      </p>
+    </figcaption>
+  </figure>
+</div>

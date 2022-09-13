@@ -1,0 +1,74 @@
+---
+import SupporterCta from "@components/SupporterCta.astro";
+import Base from "../layouts/Base.astro";
+import "./guide.css";
+
+const { frontmatter } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+let { title, id, draft, creationDate, updateDate, tags, excerpt, thumbnail } =
+  frontmatter;
+
+creationDate = new Date(creationDate).toLocaleDateString();
+if (updateDate) {
+  updateDate = new Date(updateDate).toLocaleDateString();
+}
+---
+
+<Base>
+  <title slot="title">{title}</title>
+  <meta slot="meta" property="og:description" content={excerpt} />
+  <meta slot="meta" property="og:title" content={title} />
+  <meta slot="meta" property="og:url" content={canonicalURL} />
+  <meta slot="meta" property="og:type" content="article" />
+
+  <section class="guida">
+    <div class="card rounded-container my-3">
+      <div id="post-container" class="card-body rounded-container-overlap">
+        <h2 class="card-title">
+          {title}
+        </h2>
+        <div>
+          <div class="row" style="padding-top: .5em;">
+            <div class="col">
+              {
+                tags &&
+                  tags.map((t) => (
+                    <span class="badge badge-secondary">{t}</span>
+                  ))
+              }
+            </div>
+            <div class="col">
+              <p class="text-right small">
+                <span class="font-weight-light">Pubblicazione:</span>
+                {creationDate}
+                {
+                  updateDate && (
+                    <>
+                      <br />
+                      <span class="font-weight-light">
+                        Ultimo aggiornamento:
+                      </span>{" "}
+                      {updateDate}
+                    </>
+                  )
+                }
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <hr />
+        <div id="post-body" class="card-text">
+          <slot />
+        </div>
+      </div>
+    </div>
+
+    <hr />
+    <div class="card rounded-container my-3">
+      <div class="card-body rounded-container-overlap">
+        <SupporterCta />
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,75 @@
+---
+export interface Props {
+  title: string;
+  thumbnail?: string;
+  body?: string;
+  href: string;
+  id: number;
+  tags?: string[];
+}
+
+const { body, thumbnail, title, href, tags, id } = Astro.props;
+---
+
+<style>
+  .card {
+    background-color: var(--green-dark-1);
+    border-color: var(--green-dark-2);
+  }
+
+  .card {
+    height: 100%;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  a.btn {
+    padding: 0.4rem;
+    min-width: 120px;
+  }
+
+  .rounded-container-overlap h3 > a {
+    color: unset;
+  }
+
+  h3.card-title {
+    font-size: 18px;
+  }
+</style>
+
+<div class="col my-3 px-2">
+  <div class="card">
+    <div class="card-body">
+      <h3 class="card-title">{title}</h3>
+      <p class="card-text">{body}</p>
+      <div class="mt-auto text-center">
+        <a class="btn" role="button" href={href}>
+          <i class="fa fa-book" aria-hidden="true"></i>LEGGI
+        </a>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <div class="row">
+        <div class="col">
+          <p
+            class="text-right"
+            style="float: right; color: gray; font-size:14px; margin: 2px"
+          >
+            {id}
+          </p>
+          <div class="">
+            {
+              tags &&
+                tags.map((tag) => (
+                  <span class="badge badge-secondary">{tag}</span>
+                ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
