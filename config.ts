@@ -13,3 +13,7 @@ export const externalLinks = {
   telegram: "https://t.me/crystalbit",
   discord: "https://discord.gg/SA6S2Db",
 };
+
+export const githubRepos = {
+  website: "https://github.com/crystal-bit/website-astro",
+};
