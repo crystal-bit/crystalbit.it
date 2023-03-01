@@ -23,7 +23,7 @@ source.
 
 <Image src={import("./img/godot4-editor.png")} />
 
-L'ultima versione disponibile è **Godot Engine 4 Beta** (al tempo della
+L'ultima versione disponibile è **Godot Engine 4** (al tempo della
 scrittura di questa guida).
 
 Potete trovare le build ufficiali a questo link:
@@ -33,9 +33,9 @@ Potete trovare le build ufficiali a questo link:
 
 Da qui in avanti per brevità:
 
-- con _Godot 4_ intenderò _Godot 4 Beta_
+- con _Godot 4_ intenderò _Godot 4 Stabile_
 - con _Godot 3_ mi riferirò invece all'ultima versione stabile di Godot 3, che
-  al tempo della scrittura è Godot 3.5
+  al tempo della scrittura è Godot 3.5.1
 
 ## Stabilità dell’engine
 
@@ -45,24 +45,14 @@ Da qui in avanti per brevità:
   src="https://godotengine.org/storage/app/uploads/public/5e3/0a6/083/5e30a6083a68f545209322.png"
 />
 
-**Godot 4 è ormai in feature freeze, quindi il focus dello sviluppo è nel
-migliorare le performance e rimuovere tutti i bug**. Potrebbero esserci dei
-piccoli cambi di API e qualche piccola miglioria ritenuta importante per
-l'engine. Storicamente è capitato di vedere alcune feature anche nelle fasi di
-sviluppo più avanzate come la fase RC, quindi aspettiamoci ancora qualche
-piccola sorpresa!
-
 Attualmente Godot 4 è utilizzabile senza grossi limiti, ma l'esperienza non è
-ancora rifinita come lo era per Godot 3. La cosa che ho trovato più
-fastidiosa attualmente è la presenza di un leggero lag nell'utilizzare l'editor.
-Non ho ancora capito se è un problema comune o se avviene solo su particolari
-configurazioni (magari il compositor di Gnome crea qualche problemino?).
+ancora rifinita come lo era per Godot 3. La cosa che ho trovato più fastidiosa
+attualmente è la presenza di un leggero lag nell'utilizzare l'editor (vedi
+https://github.com/godotengine/godot/issues/60106).
 
-Se volete massima solidità per sviluppare un vostro gioco allora vi consiglio di
-usare Godot 3 ancora per qualche tempo.
-
-Se invece siete proprio curiosi di cominciare a sviluppare con Godot 4, potete dare un'occhiata
-al video tutorial completo fatto qualche tempo fa con la versione alpha.
+Se invece siete proprio curiosi di cominciare a sviluppare con Godot 4, potete
+dare un'occhiata al video tutorial completo fatto qualche tempo fa con la
+versione alpha.
 
 <YoutubeEmbed videoId="uRzloUV0v0Y" />
 
@@ -77,22 +67,24 @@ l'upgrade.
   alt="Screenshot del tool per aggiornare il progetto da Godot 3 a Godot 4"
 />
 
-> È possibile utilizzare il convertitore
-> ufficiale anche da riga di comando ([PR](https://github.com/godotengine/godot/pull/51950)) usando il parametro `--convert-3to4`.
+> È possibile utilizzare il convertitore ufficiale anche da riga di comando
+> ([PR](https://github.com/godotengine/godot/pull/51950)) usando il parametro
+> `--convert-3to4`.
 
 Non vi aspettate che la conversione funzioni magicamente, il tool fa il suo
 meglio ma ci saranno diverse cose che andranno aggiustate manualmente per
 tornare ad avere un progetto pulito e senza errori.
 
 Ho provato questa soluzione con [Defending
-Todot](https://github.com/crystal-bit/defending-todot).
+Todot](https://github.com/crystal-bit/defending-todot) e ne ho parlato in questo
+video:
 
 <YoutubeEmbed videoId="G9rigRgZIKE" />
 
 ## La guida ufficiale all'upgrade
 
 Da Novembre 2022 è disponibile [una guida ufficiale per l'upgrade a Godot
-4](https://docs.godotengine.org/en/latest/tutorials/migrating/upgrading_to_godot_4.html).
+4](https://docs.godotengine.org/en/stable/tutorials/migrating/upgrading_to_godot_4.html).
 Per il momento la trovate nella versione _"latest"_ della documentazione (e non
 quella _"stable_" che invece fa riferimento a Godot 3).
 
@@ -208,9 +200,8 @@ Molto utile anche l'aggiunta di classi specifiche per numeri interi come
 
 ## 📝 GDScript
 
-> 🔨 Questa sezione è ancora in lavorazione.
-
-GDScript è il principale linguaggio di scripting di Godot Engine, la sua sintassi è simile a quella di Python e Lua.
+GDScript è il principale linguaggio di scripting di Godot Engine, la sua
+sintassi è simile a quella di Python e Lua.
 
 In Godot 4 è stato migliorato notevolmente, senza stravolgere la sintassi per
 l'utente: chi ha confidenza con Godot 3, si sentirà a suo agio nell'utilizzare
@@ -258,10 +249,7 @@ func _ready():
 
 ## C# / Mono
 
-Godot 4 supporta .NET 6 ([pr](https://github.com/godotengine/godot/pull/64089)).
-
-La versione finale di Godot 4 avrà supporto sia a GDScript che C#. Non sarà quindi
-necessario avere 2 versioni separate (una GDScript-only e l'altra con supporto a C#).
+Godot 4 supporta .NET 6 ([PR](https://github.com/godotengine/godot/pull/64089)).
 
 ## Funzionalità rimosse
 
@@ -306,22 +294,8 @@ ufficiale](https://godotengine.org/article/animation-data-redesign-40).
 
 ## Documentazione
 
-La documentazione per Godot 4 la potete trovare selezionando la versione
-“latest” dal sito ufficiale. Il link esatto è
-[docs.godotengine.org/en/latest/](https://docs.godotengine.org/en/latest)
-
-Purtroppo la documentazione potrebbe contenere alcune pagine che ancora non sono
-state aggiornate alla versione 4. Per controllare se la documentazione è valida vi
-consiglio di sfruttare le community Crystal Bit e Godot Engine Italia (o anche quella
-internazionale) per chiedere aiuto.
-
-Se invece volete controllare in autonomia, vi spiego quello che faccio di
-solito: guardate in alto a destra in qualsiasi pagina della documentazione:
-cliccate sul pulsante “Edit on GitHub” e vi si aprirà il codice sorgente della
-pagina di documentazione. Cliccate su “History” (sempre in alto a destra) e
-troverete la lista delle modifiche che sono state fatte su quella pagina.  
-Leggendo la descrizione del commit e la loro data, potrete intuire se la pagina
-è aggiornata o meno.
+La documentazione è disponibile su
+[docs.godotengine.org/en/stable/](https://docs.godotengine.org/en/stable)
 
 ## 🆕 Altre Novità
 
@@ -332,5 +306,3 @@ ufficiale.
 
 Se vuoi sapere quando nuove versioni di questa guida saranno disponibili, segui
 il [canale Telegram](https://t.me/crystalbit) Crystal Bit!
-
-{/* Cose mancanti: motore fisico, nodo tilemap, shaders */}

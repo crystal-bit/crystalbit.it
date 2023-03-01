@@ -15,5 +15,5 @@ export const externalLinks = {
 };
 
 export const githubRepos = {
-  website: "https://github.com/crystal-bit/website-astro",
+  website: "https://github.com/crystal-bit/crystalbit.it",
 };
