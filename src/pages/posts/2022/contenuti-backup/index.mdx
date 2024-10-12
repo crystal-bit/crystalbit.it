@@ -6,9 +6,9 @@ draft: false
 tags: []
 ---
 
-import { Image, Picture } from "@astrojs/image/components";
 import imgArchiveBkp from "./img/archive-backup-cb.png";
 import imgPythonDlCode from "./img/python-dl-code.png";
+import { Image } from 'astro:assets'
 
 ---
 
@@ -18,7 +18,7 @@ realizzo.
 
 Da qualche giorno ho effettuato il backup del 2021.
 
-<Image src={imgArchiveBkp} class="img-fluid" width={300} />
+<Image src={imgArchiveBkp} class="img-fluid" width={300} alt="archive backup"/>
 
 Gli archivi pubblicati fin'ora contengono i video pubblicati su YouTube,
 completi di thumbnail e descrizioni con link.
@@ -40,7 +40,7 @@ D'altra parte se proprio volete avere anche le live in locale, potete farlo
 modificando lo script Python che ho usato per generare i file di archivio!
 Trovate tutto su https://github.com/davcri/simple-yt-backup
 
-<Image src={imgPythonDlCode} width={300} />
+<Image src={imgPythonDlCode} width={300} alt="python code" />
 
 Ora torno a preparare nuovi contenuti, visto che per questo 2022 ho molte cose
 in mente di cui ancora non vi ho parlato. A presto!

@@ -4,6 +4,11 @@ import Base from "../layouts/Base.astro";
 import "./guide.css";
 
 const { frontmatter } = Astro.props;
+
+if (!frontmatter) {
+  throw new Error("Frontmatter is undefined");
+}
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 let { title, id, draft, creationDate, updateDate, tags, excerpt, thumbnail } =
   frontmatter;
@@ -16,7 +21,7 @@ if (updateDate) {
 
 <Base>
   <title slot="title">{title}</title>
-  <meta slot="meta" property="og:description" content={excerpt} />
+  <!-- <meta slot="meta" property="og:description" content={excerpt} /> -->
   <meta slot="meta" property="og:title" content={title} />
   <meta slot="meta" property="og:url" content={canonicalURL} />
   <meta slot="meta" property="og:type" content="article" />
@@ -30,12 +35,7 @@ if (updateDate) {
         <div>
           <div class="row" style="padding-top: .5em;">
             <div class="col">
-              {
-                tags &&
-                  tags.map((t) => (
-                    <span class="badge badge-secondary">{t}</span>
-                  ))
-              }
+              {tags && tags.map((t) => <span class="badge badge-secondary">{t}</span>)}
             </div>
             <div class="col">
               <p class="text-right small">
@@ -45,9 +45,7 @@ if (updateDate) {
                   updateDate && (
                     <>
                       <br />
-                      <span class="font-weight-light">
-                        Ultimo aggiornamento:
-                      </span>{" "}
+                      <span class="font-weight-light">Ultimo aggiornamento:</span>{" "}
                       {updateDate}
                     </>
                   )

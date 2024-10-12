@@ -1,0 +1,142 @@
+---
+id: 2
+title: "gitignore per progetti Godot"
+creationDate: 2020-06-03
+draft: false
+tags: ["Godot Engine"]
+---
+
+import BootstrapFigure from "@components/BootstrapFigure.astro";
+import { Image } from 'astro:assets'
+
+
+Le prime volte con Godot avevo dubbi su quali file includere nella storia git.
+
+In questa guida ho riassunto le informazioni che mi sono state più utili per configurare i repository git per i progetti Godot.
+
+## Quali file ignorare?
+
+Senza tanti giri di parole, questo è un template di _.gitignore_ che uso spesso per i miei progetti, lo trovate su [questo repository](https://github.com/github/gitignore/blob/master/Godot.gitignore) GitHub:
+
+```bash
+# Godot-specific ignores
+.import/
+export.cfg
+export_presets.cfg
+
+# Imported translations (automatically generated from CSV files)
+*.translation
+
+# Mono-specific ignores
+.mono/
+data_*/
+```
+
+Tutti questi file (pattern, a voler essere precisi) vengono ignorati da git; si
+tratta dei file che generalmente si possono escludere dai progetti Godot senza
+grosse preoccupazioni.
+
+La parte che genera più confusione è quella che riguarda gli import, quindi partiamo proprio da questa.
+
+### Premessa
+
+Prima di continuare, è importante sottolineare che `.import/` e `*.import` sono due pattern totalmente diversi. Questi due pattern sono interpretabili come:
+
+- `.import/`: la cartella _.import_ ed il suo contenuto
+- `*.import` : tutti i file che hanno estensione _.import_
+
+Notate anche che il primo è presente nel _.gitignore_ che vi ho mostrato poco fa, il secondo è invece assente.  
+Significa che la cartella _.import/_ viene ignorata, ma i singoli file _.import_ presenti nelle altre cartelle del progetto vengono invece inclusi nella storia di git!
+
+Sì è un po' contorto, ma qui sotto vi spiego perché è importante tracciare questi file e da dove saltano fuori.
+
+## Perché è importante tracciare i file `*.import`
+
+Supponiamo di star sviluppando un gioco pixel art e di importare la sprite del nostro personaggio:
+
+<Image
+  alt=""
+  src={import("./1.png")}
+  class={`figure-img img-fluid rounded`}
+  width={300}
+/>
+
+<BootstrapFigure
+  alt=""
+  caption={`Le sprite sono prese da securas.itch.io/animated-pixel-shooter-character`}
+>
+  <Image
+    alt=""
+    src={import("./2.png")}
+    class={`figure-img img-fluid rounded`}
+    width={300}
+  />
+</BootstrapFigure>
+
+La prima immagine è come Godot importa le sprite di default.
+
+La seconda, più definita, è stata re-importata disabilitando l'opzione `filter`.
+
+Quando cambiamo la configurazione di import, Godot salva queste informazioni sul file `shooter_character.png.import`.
+Se vogliamo assicurarci che l'asset venga importato correttamente anche in futuro (es: se qualcuno clone il repository da GitHub),
+dobbiamo assicurarci di tenere traccia di questo file.
+
+La buona notizia è che i file `*.import` sono file testuali in formato pseudo `.ini`: sono quindi molto leggeri e
+non appestantiscono le dimensioni del repository.
+
+> Il formato è definito pseudo `.ini` perché non segue nessuno standard particolare ma è invece specifico per Godot Engine, come spiegato da Juan Linietsky [qui](https://github.com/godotengine/godot/issues/10069).
+
+## A cosa serve allora la cartella .import?
+
+Ogni volta che aggiungiamo un assset nel gioco Godot genera automaticamente:
+
+- una cartella `.import/` nella root del progetto (se non è già presente)
+- un file ottimizzato nella cartella `.import/`.
+- un file testuale `*.import` a fianco dell'immagine caricata (normalmente nella cartella _assets/_)
+
+Di fatto la cartella _.import/_ è una sorta di cache: **Godot è sempre in grado di ricostruirne il contenuto** a partire dagli asset originali.  
+Per questo motivo può essere ignorata senza problemi.
+
+I file `*.import` devono essere invece conservati perché contengono informazioni su come quell'asset viene importato.
+
+> Sulla documentazione ufficiale trovate [questa pagina](https://docs.godotengine.org/en/3.2/getting_started/workflow/assets/import_process.html)
+> che approfondisce il processo di import.
+
+> Se siete curiosi potete controllare il codice sorgente degli importer all'interno di [`godot/editor/import`](https://github.com/godotengine/godot/tree/3.2/editor/import).
+
+## Gli altri file
+
+Prima di chiudere la guida, analizziamo gli altri file che sono elencati nel
+_.gitignore_ che ho mostrato all'inizio.
+
+I file `export.cfg` e `export_presets.cfg` sono i file di configurazione di
+export per il progetto. Le impostazioni che vengono salvate, sono quelle che
+specifichiamo nella finestra di export.
+
+<Image
+  src={import("./godot-3-export-settings.png")}
+  alt="Godot 3 Export settings window"
+  width={500}
+/>
+
+Normalmente questi file devono essere ignorati perché possono contenere alcune
+informazioni sensibili (ad esempio la keystore password per generare un APK
+Android).
+
+A volte però può avere senso includere questi file per avere un processo di build replicabile anche da altre persone. Alcuni esempi in cui vale la pena includere questi file sono:
+
+- gioco mobile che richiede determinati permessi abilitati
+- gioco che necessita di un template di export custom
+
+I file `*.translation` sono generati da Godot a partire dai file CSV. Potete ignorare questi file perché verranno ricreati automaticamente da Godot quando ne avrà bisogno.
+
+`.mono/` e `data_*/` sono cartelle usate dalla versione C# di Godot. Non ho mai usato questa versione e non so dirvi esattamente cosa contengano.  
+Comunque se state usando la versione classica di Godot con **GDScript**, potete tranquillamente eliminare queste righe dal _.gitignore_.
+
+## Conclusione
+
+Con questa guida spero di aver dato qualche informaizone utile per effettuare un setup più veloce e consapevole di un progetto Godot con git.
+
+Mi raccomando, fate i bravi con `git`, tool che mette a dura prova molti sviluppatori. Vale sempre la pena investire un po' di tempo per mantenere il proprio progetto tracciato con un control version system.
+
+Ricordate di committare spesso e buon gamedev!

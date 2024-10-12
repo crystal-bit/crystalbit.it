@@ -1,29 +1,13 @@
 ---
 import GuideCard from "@components/GuideCard.astro";
 import Base from "@layouts/Base.astro";
+import { getCollection } from "astro:content";
 
-const guides = [];
-
-try {
-  const md = await Astro.glob("./**/*.md");
-  guides.push(...md);
-} catch (e) {
-  console.error("Error while parsing guides: ", e.message);
-}
-
-try {
-  const mdx = await Astro.glob("./**/*.mdx");
-  guides.push(...mdx);
-} catch (e) {
-  console.error("Error while parsing guides: ", e.message);
-}
-
-// const astroGuides = await Astro.glob("./*.astro")
-
+const guide = await getCollection("guide");
 const sortById = (a, b) => {
-  return b.frontmatter.id - a.frontmatter.id;
+  return b.data.id - a.data.id;
 };
-guides.sort(sortById);
+guide.sort(sortById);
 ---
 
 <style>
@@ -35,14 +19,14 @@ guides.sort(sortById);
 <Base>
   <section class="guides row">
     {
-      guides.map((g) => (
+      guide.map((g) => (
         <GuideCard
-          id={g.frontmatter.id}
-          body={g.frontmatter.description}
-          title={g.frontmatter.title}
-          thumbnail={g.frontmatter.thumbnail}
-          href={g.url}
-          tags={g.frontmatter.tags}
+          id={g.data.id}
+          body={g.data.description}
+          title={g.data.title}
+          thumbnail={g.data.thumbnail}
+          href={`/guide/${g.slug}`}
+          tags={g.data.tags}
         />
       ))
     }
