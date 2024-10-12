@@ -2,6 +2,14 @@
 
 Moving crystalbit.it from Hugo to Astro. WIP
 
+## Start
+
+```sh
+corepack enable
+npm i
+npm run dev
+```
+
 ---
 
 ## Common issues

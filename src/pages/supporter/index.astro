@@ -3,7 +3,7 @@ import Base from "../../layouts/Base.astro";
 import paypal from "./img/paypal.png";
 import twitch from "./img/twitch.png";
 import { supporters } from "../../data/supporters";
-import { Image } from "@astrojs/image/components";
+import { Image } from "astro:assets";
 ---
 
 <style>
@@ -23,9 +23,8 @@ import { Image } from "@astrojs/image/components";
           <div class="col-md-12">
             <h2>SUPPORTA IL PROGETTO</h2>
             <p>
-              Grazie al supporto della community posso continuare a creare
-              contenuti open source e liberi da pubblicità sullo sviluppo di
-              videogiochi.
+              Grazie al supporto della community posso continuare a creare contenuti open
+              source e liberi da pubblicità sullo sviluppo di videogiochi.
             </p>
           </div>
         </div>
@@ -38,12 +37,7 @@ import { Image } from "@astrojs/image/components";
               class="avoid-link-underline"
               href="https://www.twitch.tv/crystal_bit/about"
             >
-              <Image
-                width={300}
-                src={twitch}
-                class="img-fluid"
-                alt="Twitch logo"
-              />
+              <Image width={300} src={twitch} class="img-fluid" alt="Twitch logo" />
             </a>
           </div>
           <div class="col-sm-6">
@@ -59,23 +53,11 @@ import { Image } from "@astrojs/image/components";
         </div>
 
         <!-- Streamlabs / Paypal -->
-        <div
-          id="paypal-row"
-          class="row"
-          style="margin-bottom: 2em; margin-top: 2em;"
-        >
+        <div id="paypal-row" class="row" style="margin-bottom: 2em; margin-top: 2em;">
           <div class="col-sm-1"></div>
           <div class="col-sm-4 text-center">
-            <a
-              class="avoid-link-underline"
-              href="https://streamlabs.com/crystalbit/tip"
-            >
-              <Image
-                width={300}
-                src={paypal}
-                class="img-fluid"
-                alt="Paypal logo"
-              />
+            <a class="avoid-link-underline" href="https://streamlabs.com/crystalbit/tip">
+              <Image width={300} src={paypal} class="img-fluid" alt="Paypal logo" />
             </a>
           </div>
           <div class="col-sm-6">
@@ -108,10 +90,7 @@ import { Image } from "@astrojs/image/components";
         <div class="row">
           <div class="col">
             <h3>SUPPORTER</h3>
-            <p>
-              Una lista all time di chi ha supportato il progetto. Grazie a
-              tutti!
-            </p>
+            <p>Una lista all time di chi ha supportato il progetto. Grazie a tutti!</p>
             <p
               id="supporters-paragraph"
               style="font-size: 120%; color: rgb(230,230,230);"
@@ -136,8 +115,7 @@ import { Image } from "@astrojs/image/components";
 
             <p>
               <small style="color: rgba(255,255,255, .5);">
-                Contattatemi in caso di qualsiasi problema con la lista dei
-                supporter!
+                Contattatemi in caso di qualsiasi problema con la lista dei supporter!
               </small>
             </p>
 
@@ -152,16 +130,12 @@ import { Image } from "@astrojs/image/components";
             <ul>
               <li>Più video tutorial e guide</li>
               <li>Migliore qualità dei contenuti</li>
+              <li>Studio di nuovi argomenti e tecnologie (e quindi altri tutorial)</li>
               <li>
-                Studio di nuovi argomenti e tecnologie (e quindi altri tutorial)
+                Nuove iniziative per la community come Space Shooter e Defending Todot
               </li>
               <li>
-                Nuove iniziative per la community come Space Shooter e Defending
-                Todot
-              </li>
-              <li>
-                Fixare e aggiornare i progetti open source dell'organizzazione
-                Github
+                Fixare e aggiornare i progetti open source dell'organizzazione Github
               </li>
             </ul>
           </div>
@@ -185,11 +159,7 @@ import { Image } from "@astrojs/image/components";
     elapsed += delta / 1000;
     for (const span of els) {
       const t = 2 * Math.PI * elapsed;
-      const rgbMin = [
-        20 + 40 * Math.sin(t / 2),
-        30 + 40 * Math.sin(4 + t / 4),
-        90,
-      ];
+      const rgbMin = [20 + 40 * Math.sin(t / 2), 30 + 40 * Math.sin(4 + t / 4), 90];
       span.col = [
         rgbMin[0] + ((Math.sin(i + t / duration) + 1) / 2) * 60,
         rgbMin[1] + ((Math.sin(i + t / duration) + 1) / 2) * 140,

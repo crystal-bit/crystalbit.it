@@ -8,7 +8,7 @@ draft: false
 tags: [Godot Engine 4]
 ---
 
-import { Image, Picture } from "@astrojs/image/components";
+import { Image, Picture } from "astro:assets";
 import thumb from "./thumb.png";
 import imgPixelArtPreset from "./img/pixel-art-preset.png";
 import imgGodot4NewProject from "./img/godot4-new-project.png";
@@ -20,7 +20,7 @@ Di recente sta crescendo l’interesse verso Godot Engine 4. Ho raccolto qui tut
 le informazioni più utili per chi sta valutando l'utilizzo di questo engine open
 source.
 
-<Image src={import("./img/godot4-editor.png")} />
+<Image src={import("./img/godot4-editor.png")} alt="editor" />
 
 L'ultima versione disponibile è **Godot Engine 4** (al tempo della
 scrittura di questa guida).
@@ -38,8 +38,9 @@ Da qui in avanti per brevità:
 
 <Image
   width={500}
-  aspectRatio={16 / 9}
+  height={889}
   src="https://godotengine.org/storage/app/uploads/public/5e3/0a6/083/5e30a6083a68f545209322.png"
+  alt="3d render"
 />
 
 Attualmente Godot 4 è utilizzabile senza grossi limiti, ma l'esperienza non è
@@ -118,7 +119,7 @@ Il team di Godot ha parlato anche di altre soluzioni che
 sono in valutazione per l'implementazione con la versione 4.1
 ([fonte](https://twitter.com/reduzio/status/1568555288910774273?s=20&t=DnhjJkMnamKLRaM7LvxJ4A)).
 
-<Image src={imgGodot4NewProject} />
+<Image src={imgGodot4NewProject} alt="new project" />
 
 Tra le altre novità troviamo la compilazione degli shader in multi-threading e la
 possibilità di importare shader GLSL4.50 (con estensioni Vulkan). Notizia che
@@ -193,7 +194,7 @@ di tipo CanvasItem inserito nella scena, tenendo a mente che:
 Molto utile anche l'aggiunta di classi specifiche per numeri interi come
 `Vector2i`, `Rect2i`, `Vector3i`.
 
-<Image src={imgPixelArtPreset} />
+<Image src={imgPixelArtPreset} alt="pixel art preset" />
 
 ## 📝 GDScript
 
@@ -271,6 +272,7 @@ fisico ([link](https://godotengine.org/article/physics-progress-report-1)).
   src={"https://godotengine.org/storage/app/media/godot-heightmap.gif"}
   width={300}
   height={200}
+  alt="heightmap"
 />
 
 Altra parte dell'engine a ricevere un grosso update è stata il sistema di pathfinding

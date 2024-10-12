@@ -1,6 +1,6 @@
 ---
-import { Image } from "@astrojs/image/components";
 import { site } from "../../config";
+import { Image } from "astro:assets";
 
 const { url } = Astro;
 const { pathname } = url;
@@ -43,11 +43,7 @@ const { pathname } = url;
           return (
             <a
               href={href}
-              class:list={[
-                "nav-link",
-                "anim-left",
-                { active: isActive, wip: isWip },
-              ]}
+              class:list={["nav-link", "anim-left", { active: isActive, wip: isWip }]}
             >
               <span>{el.name.toUpperCase()}</span>
             </a>
