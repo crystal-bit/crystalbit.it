@@ -1,0 +1,19 @@
+---
+import { formatters } from "src/utils/formatters.mjs";
+
+// export interface Props {
+//   title: string;
+//   thumbnail?: string;
+//   body?: string;
+//   href: string;
+//   tags?: string[];
+// }
+
+const { title, href, creationDate } = Astro.props;
+---
+
+<div class="my-3 px-2">
+  <div>
+    {formatters.date(creationDate)} - <a href=`${href}`>{title}</a>
+  </div>
+</div>

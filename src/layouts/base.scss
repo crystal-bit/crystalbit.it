@@ -422,27 +422,27 @@
   }
   
   /*
-   * Post - single page
+   * Main container - single page
    */
   
-  #post-container .card-title {
+  #main-container .card-title {
     font-size: 30px;
     font-weight: 800;
   }
   
-  #post-container .alert-secondary {
+  #main-container .alert-secondary {
     background-color: var(--container-dark);
     border-color: var(--light-green);
     color: var(--white);
   }
   
   #about h2:not(:first-child),
-  #post-container h2:not(:first-child) {
+  #main-container h2:not(:first-child) {
     margin-top: 1.5em;
     margin-bottom: 0.6em;
   }
   
-  #post-container img, #post-container video {
+  #main-container img, #main-container video {
     display: block;
     max-width: 85%;
     margin: auto;
@@ -453,7 +453,7 @@
   }
   
   
-  #post-container blockquote {
+  #main-container blockquote {
     background-color: rgba(0, 0, 0, 0.25);
     margin-left: 1rem;
     margin-right: 2rem;
@@ -465,7 +465,7 @@
     border-spacing: 20px;
   }
   
-  #post-container blockquote p:last-of-type {
+  #main-container blockquote p:last-of-type {
     margin-bottom: 0px;
   }
   

@@ -6,17 +6,6 @@ const { url } = Astro;
 const { pathname } = url;
 ---
 
-<style>
-  a.wip {
-    opacity: 0.3;
-    user-select: none;
-  }
-
-  a.wip span:hover {
-    cursor: not-allowed;
-  }
-</style>
-
 <header class="masthead">
   <div class="inner">
     <h3 class="masthead-brand">
@@ -38,13 +27,9 @@ const { pathname } = url;
         site.menu.map((el) => {
           const section = pathname.split("/")[1];
           const isActive = section === el.sectionSlug;
-          const isWip = ["posts"].includes(el.sectionSlug);
-          const href = `/${isWip ? "#" : el.sectionSlug}`;
+          const href = `/${el.sectionSlug}`;
           return (
-            <a
-              href={href}
-              class:list={["nav-link", "anim-left", { active: isActive, wip: isWip }]}
-            >
+            <a href={href} class:list={["nav-link", "anim-left", { active: isActive }]}>
               <span>{el.name.toUpperCase()}</span>
             </a>
           );

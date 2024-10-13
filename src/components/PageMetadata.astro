@@ -1,0 +1,13 @@
+---
+const { props } = Astro;
+
+const { title, excerpt } = props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<title slot="title">{title}</title>
+<!-- <meta slot="meta" property="og:description" content={excerpt} /> -->
+<meta slot="meta" property="og:title" content={title} />
+<meta slot="meta" property="og:url" content={canonicalURL} />
+<meta slot="meta" property="og:type" content="article" />

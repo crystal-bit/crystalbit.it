@@ -1,0 +1,31 @@
+---
+import MainContainer from "@components/MainContainer.astro";
+import PostEntry from "@components/PostEntry.astro";
+import Base from "@layouts/Base.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("posts");
+---
+
+<Base>
+  <section>
+    <MainContainer>
+      <ul>
+        {
+          posts.map((g) => (
+            <li id={g.data.id}>
+              <PostEntry
+                body={g.data.description}
+                title={g.data.title}
+                thumbnail={g.data.thumbnail}
+                href={`/posts/${g.slug}`}
+                creationDate={g.data.creationDate}
+                tags={g.data.tags}
+              />
+            </li>
+          ))
+        }
+      </ul>
+    </MainContainer>
+  </section>
+</Base>

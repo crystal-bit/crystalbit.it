@@ -1,0 +1,26 @@
+---
+import Post from "@layouts/Post.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const postEntries = await getCollection("posts");
+
+  return postEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+let Content;
+
+try {
+  Content = (await entry.render()).Content;
+} catch (err) {
+  console.error(err);
+}
+---
+
+<Post frontmatter={entry.data}>
+  <Content />
+</Post>

@@ -173,6 +173,15 @@ declare module 'astro:content' {
   data: any
 } & { render(): Render[".mdx"] };
 };
+"posts": {
+"2022/contenuti-backup/index.mdx": {
+	id: "2022/contenuti-backup/index.mdx";
+  slug: "2022/contenuti-backup";
+  body: string;
+  collection: "posts";
+  data: any
+} & { render(): Render[".mdx"] };
+};
 
 	};
 

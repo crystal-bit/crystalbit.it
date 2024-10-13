@@ -8,8 +8,8 @@ const guide = defineCollection({
     title: z.string(),
     creationDate: z.date(),
     updateDate: z.date().optional(),
-    draft: z.boolean(),
-    tags: z.array(z.string()),
+    draft: z.boolean().optional(),
+    tags: z.array(z.string()).optional(),
   }),
 });
 

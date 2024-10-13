@@ -1,14 +1,43 @@
 ---
+import { formatters } from "src/utils/formatters.mjs";
 import Base from "../layouts/Base.astro";
+import MainContainer from "@components/MainContainer.astro";
+import PageMetadata from "@components/PageMetadata.astro";
+
+const { props } = Astro;
+const { title, frontmatter } = props;
 ---
 
-<script>
-  console.warn("TODO: post component");
-</script>
-
 <Base>
-  <div id="post">
-    <p>TODO post</p>
-    <slot />
-  </div>
+  <PageMetadata title={title} />
+
+  <section>
+    <MainContainer>
+      <h2 class="card-title">
+        {frontmatter.title}
+      </h2>
+      <div class="row" style="padding-top: .5em;">
+        <div class="col">
+          <p class="text-right small">
+            <span class="font-weight-light">Pubblicazione:</span>
+            {formatters.date(frontmatter.creationDate)}
+            {
+              frontmatter.updateDate && (
+                <>
+                  <br />
+                  <span class="font-weight-light">Ultimo aggiornamento:</span>{" "}
+                  {formatters.date(frontmatter.updateDate)}
+                </>
+              )
+            }
+          </p>
+        </div>
+      </div>
+
+      <hr />
+      <div class="card-text">
+        <slot />
+      </div>
+    </MainContainer>
+  </section>
 </Base>
